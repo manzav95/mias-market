@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-screen bg-cream font-body text-grape antialiased;
+}
+
+::selection {
+  background: #f5d0fe;
+  color: #3b0764;
+}
