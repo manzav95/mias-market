@@ -23,12 +23,12 @@ export function Header() {
     <header className="sticky top-0 z-40 shadow-sm">
       <AnnouncementBar />
       <div className="border-b border-lilac/40 bg-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3 md:py-4">
-          <div className="shrink-0">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 items-center gap-x-2 gap-y-1.5 px-3 py-1.5 md:grid-cols-[1fr_auto_1fr] md:grid-rows-1 md:gap-x-6 md:gap-y-0 md:px-4 md:py-2">
+          <div className="min-w-0 justify-self-start md:min-w-0">
             <Logo />
           </div>
           <nav
-            className="mx-auto hidden flex-1 justify-center gap-6 font-body text-sm font-bold text-grape md:flex lg:gap-8 lg:text-base"
+            className="col-span-2 row-start-2 flex flex-wrap justify-center gap-x-4 gap-y-1 font-body text-sm font-bold text-grape md:col-span-1 md:col-start-2 md:row-start-1 md:flex-nowrap md:justify-center md:gap-8 md:text-base"
             aria-label="Main"
           >
             {nav.map(({ href, label }) => {
@@ -52,7 +52,7 @@ export function Header() {
               );
             })}
           </nav>
-          <div className="ml-auto flex items-center gap-1 sm:gap-2">
+          <div className="col-start-2 row-start-1 flex items-center justify-end gap-1 md:col-start-3 md:gap-2">
             <IconLink href="/shop#browse" label="Search shop">
               <IconSearch />
             </IconLink>
@@ -62,7 +62,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
-              className="relative rounded-full p-2 text-grape transition hover:bg-lilac-soft hover:text-grapemuted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
+              className="relative rounded-full p-1.5 text-grape transition hover:bg-lilac-soft hover:text-grapemuted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
               aria-label={`Selected items, ${totalCount} selected`}
             >
               <IconBag />
@@ -71,30 +71,6 @@ export function Header() {
               </span>
             </button>
           </div>
-        </div>
-        <div className="border-t border-lilac/30 bg-cream/95 px-4 pb-3 md:hidden">
-          <nav
-            className="flex flex-wrap justify-center gap-x-4 gap-y-2 font-body text-sm font-bold text-grape"
-            aria-label="Main mobile"
-          >
-            {nav.map(({ href, label }) => {
-              const active =
-                href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(href);
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`rounded-full px-3 py-1 ${
-                    active ? "bg-lilac-soft text-grapemuted" : ""
-                  }`}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-          </nav>
         </div>
       </div>
     </header>
@@ -113,7 +89,7 @@ function IconLink({
   return (
     <Link
       href={href}
-      className="rounded-full p-2 text-grape transition hover:bg-lilac-soft hover:text-grapemuted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
+      className="rounded-full p-1.5 text-grape transition hover:bg-lilac-soft hover:text-grapemuted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
       aria-label={label}
     >
       {children}
@@ -123,7 +99,7 @@ function IconLink({
 
 function IconSearch() {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
       <circle cx="11" cy="11" r="7" strokeWidth="2" />
       <path d="m20 20-3-3" strokeWidth="2" strokeLinecap="round" />
     </svg>
@@ -132,7 +108,7 @@ function IconSearch() {
 
 function IconUser() {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
       <path
         d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
         strokeWidth="2"
@@ -145,7 +121,7 @@ function IconUser() {
 
 function IconBag() {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
+    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden>
       <path
         d="M6 7h15l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z"
         strokeWidth="2"

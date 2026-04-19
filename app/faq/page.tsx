@@ -1,25 +1,4 @@
-const faqs = [
-  {
-    q: "How do I order?",
-    a: "Browse the Shop page or home categories, tap Select Items, then open the Selected Items panel from the header. When you are ready, press Email My Order Request — your mail app opens with everything listed for you.",
-  },
-  {
-    q: "Do you ship or offer local pickup?",
-    a: "This demo site does not process shipping. When you email us, tell us your ZIP code or city and whether you prefer mail or local pickup. We will reply with what is possible for your area.",
-  },
-  {
-    q: "What payment methods do you accept?",
-    a: "Venmo, Apple Pay, Zelle, and cash in person for local meets. After we confirm your order by email, we will share the right payment details for the method you choose.",
-  },
-  {
-    q: "Are items really handmade?",
-    a: "Yes! Pieces are assembled and finished by hand, so tiny variations are normal — that is part of the charm.",
-  },
-  {
-    q: "Can I request custom items?",
-    a: "Absolutely. Add notes next to each selected item, or send a longer message in your email. Custom work depends on timing and materials, and we will always confirm before making anything special.",
-  },
-] as const;
+import { faqs } from "@/data/faq";
 
 export const metadata = {
   title: "FAQ",
@@ -33,12 +12,13 @@ export default function FaqPage() {
           FAQ
         </h1>
         <p className="mt-3 text-center font-body text-grape/80">
-          Quick answers about ordering, payments, and handmade goodies.
+          Local pickup only — we do not ship. Order by email using Select Items on
+          this site. General topics first, then one question per product category.
         </p>
         <dl className="mt-10 space-y-6">
           {faqs.map((item) => (
             <div
-              key={item.q}
+              key={item.id}
               className="rounded-[1.75rem] border border-lilac/50 bg-white/90 p-6 shadow-card"
             >
               <dt className="font-body text-lg font-bold text-grape">{item.q}</dt>

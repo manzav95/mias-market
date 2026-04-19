@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef } from "react";
 import {
   type PaymentPreference,
   useSelectedItems,
 } from "@/context/SelectedItemsContext";
 import { ORDER_EMAIL } from "@/lib/constants";
 import { orderRequestMailtoHref } from "@/lib/mailto";
+import { computeOrderSubtotal, formatUsd } from "@/lib/order-price";
 
 const paymentChoices: PaymentPreference[] = [
   "Venmo",
@@ -46,10 +47,31 @@ export function SelectedItemsDrawer() {
     };
   }, [drawerOpen, onClose]);
 
-  const mailto =
-    items.length > 0
-      ? orderRequestMailtoHref(ORDER_EMAIL, items, paymentPreference)
-      : undefined;
+  const subtotalInfo = useMemo(
+    () => (items.length > 0 ? computeOrderSubtotal(items) : null),
+    [items],
+  );
+
+  const openOrderEmail = useCallback(() => {
+    if (items.length === 0) return;
+    const entered = window.prompt(
+      "What name should we use on your order? (Mia will see this in the email.)",
+      "",
+    );
+    if (entered === null) return;
+    const customerName = entered.trim();
+    if (!customerName) {
+      window.alert("Please enter your name so Mia knows who the order is from.");
+      return;
+    }
+    const href = orderRequestMailtoHref(
+      ORDER_EMAIL,
+      items,
+      paymentPreference,
+      customerName,
+    );
+    window.location.assign(href);
+  }, [items, paymentPreference]);
 
   return (
     <div
@@ -159,6 +181,30 @@ export function SelectedItemsDrawer() {
           )}
         </div>
 
+        {items.length > 0 && (
+          <div className="shrink-0 border-t border-lilac/40 bg-white/95 px-5 py-3">
+            {subtotalInfo ? (
+              <>
+                <p className="text-right font-display text-lg font-semibold text-grape">
+                  {subtotalInfo.isEstimate ? "Est. subtotal" : "Subtotal"}:{" "}
+                  {formatUsd(subtotalInfo.subtotal)}
+                </p>
+                {subtotalInfo.isEstimate ? (
+                  <p className="mt-1 text-right font-body text-xs text-grape/65">
+                    When a price is a range on the shop, we use a midpoint for
+                    this total. Mia will confirm the final amount.
+                  </p>
+                ) : null}
+              </>
+            ) : (
+              <p className="text-right font-body text-sm text-grape/75">
+                Subtotal: check each item&apos;s price above. Mia will confirm
+                your total in email.
+              </p>
+            )}
+          </div>
+        )}
+
         <div className="border-t border-lilac/40 bg-white/90 px-5 py-4">
           <p className="font-body text-xs font-bold uppercase tracking-wide text-grape/70">
             Preferred payment method
@@ -179,13 +225,14 @@ export function SelectedItemsDrawer() {
               </button>
             ))}
           </div>
-          {items.length > 0 && mailto ? (
-            <a
-              href={mailto}
+          {items.length > 0 ? (
+            <button
+              type="button"
+              onClick={openOrderEmail}
               className="mt-4 flex w-full items-center justify-center rounded-full bg-grapemuted py-3 font-display text-base font-semibold text-white shadow-float transition hover:bg-grape focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-grape"
             >
               Email My Order Request
-            </a>
+            </button>
           ) : (
             <span className="mt-4 flex w-full cursor-not-allowed items-center justify-center rounded-full bg-grape/30 py-3 font-display text-base font-semibold text-white/90">
               Email My Order Request

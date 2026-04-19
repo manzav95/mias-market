@@ -42,6 +42,7 @@ Adjust the `482` / `251` / `231` heights if your new composite has different row
 | Venmo / Apple Pay / Zelle / cash copy | `lib/constants.ts` → `PAYMENT_DETAILS` |
 | Shop inventory | `data/products.ts` |
 | Home “Shop by Category” cards | `data/categories.ts` (each row links to a `productId` in `products.ts`) |
+| FAQ questions and answers | `data/faq.ts` (replace any answer that still says to edit that file) |
 
 ## Project layout
 
@@ -51,7 +52,7 @@ Adjust the `482` / `251` / `231` heights if your new composite has different row
 - `lib/constants.ts` — brand email, payment placeholders, optional logo filename.
 - `lib/mia-showcase-assets.ts` — paths to the composite, hero banner, and per-tile PNGs.
 - `lib/mailto.ts` — builds the `mailto:` link and message body.
-- `data/` — editable mock products and home categories.
+- `data/` — editable mock products, home categories, and FAQ entries (`faq.ts`).
 - `public/images/` — static images served from `/images/...`.
 
 ## Accessibility notes

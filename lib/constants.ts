@@ -4,7 +4,7 @@
  */
 
 /** Order + contact inquiries go here (mailto recipient). */
-export const ORDER_EMAIL = "hello@miasminimarket.com";
+export const ORDER_EMAIL = "dahliazavala1@gmail.com";
 
 export const SITE_NAME = "Mia’s Mini Market";
 
@@ -20,5 +20,5 @@ export const PAYMENT_DETAILS = {
   applePay: "your.email@example.com or (555) 555-5555",
   zelle: "your.email@example.com or (555) 555-5555",
   cashNote:
-    "Cash is welcome for local in-person pickup — message us to arrange a meetup!",
+    "Cash is welcome. Please message us to arrange a meetup!",
 } as const;

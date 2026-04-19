@@ -12,21 +12,24 @@ export function Logo({ variant = "default", className = "" }: LogoProps) {
   const useImage = LOGO_IMAGE_PATH.length > 0;
 
   if (useImage) {
+    /** Transparent PNG — width % is of the link block (grid column / footer cell). */
+    const imageClass = isLight
+      ? "h-auto w-[70%] max-w-full object-contain object-left"
+      : "h-auto w-[50%] max-w-full object-contain object-left";
     return (
       <Link
         href="/"
-        className={`relative inline-flex items-center ${className}`}
+        className={`block w-full max-w-full min-w-0 ${className}`}
         aria-label={`${SITE_NAME} home`}
       >
         <Image
           src={`/images/${LOGO_IMAGE_PATH}`}
           alt={SITE_NAME}
-          width={256}
-          height={256}
-          className={`h-12 w-12 object-contain sm:h-14 sm:w-14 md:h-[4.25rem] md:w-[4.25rem] ${
-            isLight ? "drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)]" : ""
-          }`}
+          width={512}
+          height={512}
+          className={imageClass}
           priority
+          sizes="(max-width: 768px) 50vw, 200px"
         />
       </Link>
     );

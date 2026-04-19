@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
     <section className="border-b border-violet-300/40 bg-satin">
       <div className="mx-auto w-full max-w-[1600px]">
-        <div className="relative w-full">
+        <div className="relative w-full overflow-hidden">
           <Image
             src={miaShowcase.heroBanner}
             alt="Mia’s Mini Market — handmade accessories on lavender satin"
@@ -17,11 +17,16 @@ export function HeroSection() {
             height={height}
             priority
             sizes="(max-width: 1600px) 100vw, 1600px"
-            className="block h-auto w-full align-middle"
+            className="block h-auto w-full max-sm:scale-[1.02] max-sm:blur-sm max-sm:contrast-[0.97] align-middle"
           />
-          {/* Left scrim so headline reads over the satin area */}
+          {/* Mobile: blur-friendly plate so headline reads over busy photo */}
           <div
-            className="pointer-events-none absolute inset-y-0 left-0 w-[min(100%,46%)] bg-gradient-to-r from-[#e4dcfc]/95 via-[#ebe3fc]/65 to-transparent sm:w-[42%] sm:from-[#dfd5f8]/92 sm:via-[#e8e0fc]/45"
+            className="pointer-events-none absolute inset-0 bg-[#ebe3fc]/45 backdrop-blur-md sm:hidden"
+            aria-hidden
+          />
+          {/* sm+: left scrim over the satin side of the banner */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 hidden w-[42%] bg-gradient-to-r from-[#dfd5f8]/92 via-[#e8e0fc]/45 to-transparent sm:block"
             aria-hidden
           />
           <div className="absolute inset-0 flex items-center">

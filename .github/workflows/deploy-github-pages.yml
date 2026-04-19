@@ -1,0 +1,53 @@
+# Builds a static site (next build → out/) and publishes to GitHub Pages.
+# Repo Settings → Pages → Source: GitHub Actions.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Set BASE_PATH for project pages
+        shell: bash
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          NAME="${{ github.event.repository.name }}"
+          if [ "$NAME" = "$OWNER.github.io" ]; then
+            echo "BASE_PATH=" >> "$GITHUB_ENV"
+          else
+            echo "BASE_PATH=/$NAME" >> "$GITHUB_ENV"
+          fi
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
