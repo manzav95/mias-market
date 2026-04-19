@@ -1,3 +1,5 @@
+import { publicUrl } from "@/lib/publicUrl";
+
 /**
  * Product photography derived from `public/images/mia-showcase-composite.png`.
  * The composite was split with macOS `sips` (hero = top ~50%, row2 = five tiles, row3 = three tiles).
@@ -7,25 +9,25 @@
 export const miaHeroIntrinsicSize = { width: 1024, height: 409 } as const;
 
 export const miaShowcase = {
-  composite: "/images/mia-showcase-composite.png",
+  composite: publicUrl("/images/mia-showcase-composite.png"),
   /** Full-resolution wide banner — displayed at native aspect ratio (not stretched). */
-  heroBanner: "/images/mia-hero-source.png",
+  heroBanner: publicUrl("/images/mia-hero-source.png"),
   tiles: {
     /** Dedicated product shot (replaces composite tile). */
-    hairClips: "/images/mia-hair-claw-clips.png",
+    hairClips: publicUrl("/images/mia-hair-claw-clips.png"),
     /** Dedicated product shot for Pipe Cleaner Animals (replaces composite tile). */
-    plush: "/images/mia-pipe-cleaner-animals.png",
+    plush: publicUrl("/images/mia-pipe-cleaner-animals.png"),
     /** Dedicated product shot for Clay Items (replaces composite tile). */
-    charms: "/images/mia-clay-items.png",
+    charms: publicUrl("/images/mia-clay-items.png"),
     /** Dedicated product shot for Pipe Cleaner Bouquet (replaces composite tile). */
-    bouquet: "/images/mia-pipe-cleaner-bouquet.png",
+    bouquet: publicUrl("/images/mia-pipe-cleaner-bouquet.png"),
     /** Dedicated product shot for Clay Keychains (replaces composite tile). */
-    keychains: "/images/mia-clay-keychains.png",
+    keychains: publicUrl("/images/mia-clay-keychains.png"),
     /** Dedicated product shot for Balloon Squishies (replaces composite tile). */
-    balloons: "/images/mia-balloon-squishies.png",
+    balloons: publicUrl("/images/mia-balloon-squishies.png"),
     /** Dedicated product shot for Bracelets (replaces composite tile). */
-    bracelets: "/images/mia-bracelets.png",
+    bracelets: publicUrl("/images/mia-bracelets.png"),
     /** Dedicated product shot for Bedazzled Items (replaces composite tile). */
-    bedazzled: "/images/mia-bedazzled-items.png",
+    bedazzled: publicUrl("/images/mia-bedazzled-items.png"),
   },
 } as const;

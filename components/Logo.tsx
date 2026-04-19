@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { LOGO_IMAGE_PATH, SITE_NAME } from "@/lib/constants";
+import { publicUrl } from "@/lib/publicUrl";
 
 type LogoProps = {
   variant?: "default" | "light";
@@ -23,7 +24,7 @@ export function Logo({ variant = "default", className = "" }: LogoProps) {
         aria-label={`${SITE_NAME} home`}
       >
         <Image
-          src={`/images/${LOGO_IMAGE_PATH}`}
+          src={publicUrl(`/images/${LOGO_IMAGE_PATH}`)}
           alt={SITE_NAME}
           width={512}
           height={512}
