@@ -16,9 +16,9 @@ export const LOGO_IMAGE_PATH = "mia-logo.png";
 
 /** Shown on the site — replace with your real handles / numbers. */
 export const PAYMENT_DETAILS = {
-  venmo: "@YourVenmoUsername",
-  applePay: "your.email@example.com or (555) 555-5555",
-  zelle: "your.email@example.com or (555) 555-5555",
+  venmo: "@dahliazavala",
+  applePay: "9253241849",
+  zelle: "9257279138",
   cashNote:
     "Cash is welcome. Please message us to arrange a meetup!",
 } as const;
